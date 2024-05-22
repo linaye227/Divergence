@@ -1,10 +1,10 @@
 # transitions are a list consisting of [present state, (current channel, channel content), (next channel, next channel content), next state, transition weight]
 # (-,-) means exit of client from the server
-0 1 2 (set of channels)
-0 1 (set of states)
-2 1 1 0 (dynamic weights)
-1 0 0 1 (dynamic weights)
-0 (0,$) (1,a) 1 5 (transition)
-1 (1,a) (2,b) 1 2 (transition)
-1 (2,b) (1,a) 0 3 (transition)
-0 (1,a) (-,-) 0 6 (transition)
+0 1 2               #(set of channels)
+0 1                 #(set of states)
+2 1 1 0             #(dynamic weights)
+1 0 0 1             #(dynamic weights)
+0 (0,$) (1,a) 1 5   #(transition)
+1 (1,a) (2,b) 1 2   #(transition)
+1 (2,b) (1,a) 0 3   #(transition)
+0 (1,a) (-,-) 0 6   #(transition)
