@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <model formalismUrl="http://formalisms.cosyverif.org/sptgd-net.fml" xmlns="http://cosyverif.org/ns/model">
-<attribute name="declaration"><attribute name="constants"><attribute name="intConsts"><attribute name="intConst"><attribute name="name">NbClient</attribute><attribute name="expr"><attribute name="numValue">1</attribute></attribute></attribute><attribute name="intConst"><attribute name="name">NbPosition</attribute><attribute name="expr"><attribute name="numValue">1</attribute></attribute></attribute></attribute></attribute><attribute name="classDeclaration"><attribute name="name">client</attribute><attribute name="classType"><attribute name="classIntInterval"><attribute name="lowerBound">1</attribute><attribute name="higherBound"><attribute name="name">NbClient</attribute></attribute></attribute></attribute><attribute name="circular">false</attribute></attribute><attribute name="classDeclaration"><attribute name="name">position</attribute><attribute name="classType"><attribute name="classIntInterval"><attribute name="lowerBound">1</attribute><attribute name="higherBound"><attribute name="name">NbPosition</attribute></attribute></attribute></attribute><attribute name="circular">true</attribute></attribute><attribute name="domainDeclaration"><attribute name="name">CP</attribute><attribute name="domainType"><attribute name="cartesianProduct"><attribute name="type">client</attribute><attribute name="type">position</attribute></attribute></attribute></attribute><attribute name="variableDeclaration"><attribute name="name">x</attribute><attribute name="type">client</attribute></attribute><attribute name="variableDeclaration"><attribute name="name">p</attribute><attribute name="type">position</attribute></attribute></attribute>
+<attribute name="declaration"><attribute name="constants"><attribute name="intConsts"><attribute name="intConst"><attribute name="name">NbClient</attribute><attribute name="expr"><attribute name="numValue">2</attribute></attribute></attribute><attribute name="intConst"><attribute name="name">NbPosition</attribute><attribute name="expr"><attribute name="numValue">196</attribute></attribute></attribute></attribute></attribute><attribute name="classDeclaration"><attribute name="name">client</attribute><attribute name="classType"><attribute name="classEnum"><attribute name="enumValue">x1</attribute><attribute name="enumValue">x2</attribute></attribute></attribute><attribute name="circular">false</attribute></attribute><attribute name="classDeclaration"><attribute name="name">position1</attribute><attribute name="classType"><attribute name="classIntInterval"><attribute name="lowerBound">1</attribute><attribute name="higherBound"><attribute name="name">NbPosition</attribute></attribute></attribute></attribute><attribute name="circular">true</attribute></attribute><attribute name="domainDeclaration"><attribute name="name">CP1</attribute><attribute name="domainType"><attribute name="cartesianProduct"><attribute name="type">client</attribute><attribute name="type">position1</attribute></attribute></attribute></attribute><attribute name="classDeclaration"><attribute name="name">position2</attribute><attribute name="classType"><attribute name="classIntInterval"><attribute name="lowerBound">1</attribute><attribute name="higherBound"><attribute name="name">NbPosition</attribute></attribute></attribute></attribute><attribute name="circular">true</attribute></attribute><attribute name="domainDeclaration"><attribute name="name">CP2</attribute><attribute name="domainType"><attribute name="cartesianProduct"><attribute name="type">client</attribute><attribute name="type">position2</attribute></attribute></attribute></attribute><attribute name="variableDeclaration"><attribute name="name">p1</attribute><attribute name="type">position1</attribute></attribute><attribute name="variableDeclaration"><attribute name="name">p2</attribute><attribute name="type">position2</attribute></attribute><attribute name="variableDeclaration"><attribute name="name">x</attribute><attribute name="type">client</attribute></attribute></attribute>
 <node id="0" nodeType="place"> 
 	<attribute name="name">Count</attribute><attribute name="marking"><attribute name="expr"><attribute name="numValue">1</attribute></attribute></attribute>
 </node>
@@ -10,33 +10,33 @@
 </node>
 <node id="2" nodeType="place"> 
 	<attribute name="name">C1</attribute>
-	<attribute name="domain"><attribute name="type">CP</attribute></attribute>
+	<attribute name="domain"><attribute name="type">CP1</attribute></attribute>
 	<attribute name="marking"><attribute name="expr"><attribute name="numValue">0</attribute></attribute></attribute>
 </node>
 <node id="3" nodeType="place"> 
 	<attribute name="name">In1</attribute>
-	<attribute name="domain"><attribute name="type">position</attribute></attribute>
-	<attribute name="marking"><attribute name="token"><attribute name="occurs"><attribute name="intValue">1</attribute></attribute><attribute name="tokenProfile"><attribute name="expr"><attribute name="enumConst"><attribute name="type">position</attribute><attribute name="enumValue">n0</attribute></attribute></attribute></attribute></attribute></attribute>
+	<attribute name="domain"><attribute name="type">position1</attribute></attribute>
+	<attribute name="marking"><attribute name="token"><attribute name="occurs"><attribute name="intValue">1</attribute></attribute><attribute name="tokenProfile"><attribute name="expr"><attribute name="enumConst"><attribute name="type">position1</attribute><attribute name="enumValue">n0</attribute></attribute></attribute></attribute></attribute></attribute>
 </node>
 <node id="4" nodeType="place"> 
 	<attribute name="name">Out1</attribute>
-	<attribute name="domain"><attribute name="type">position</attribute></attribute>
-	<attribute name="marking"><attribute name="token"><attribute name="occurs"><attribute name="intValue">1</attribute></attribute><attribute name="tokenProfile"><attribute name="expr"><attribute name="enumConst"><attribute name="type">position</attribute><attribute name="enumValue">n0</attribute></attribute></attribute></attribute></attribute></attribute>
+	<attribute name="domain"><attribute name="type">position1</attribute></attribute>
+	<attribute name="marking"><attribute name="token"><attribute name="occurs"><attribute name="intValue">1</attribute></attribute><attribute name="tokenProfile"><attribute name="expr"><attribute name="enumConst"><attribute name="type">position1</attribute><attribute name="enumValue">n0</attribute></attribute></attribute></attribute></attribute></attribute>
 </node>
 <node id="5" nodeType="place"> 
 	<attribute name="name">C2</attribute>
-	<attribute name="domain"><attribute name="type">CP</attribute></attribute>
+	<attribute name="domain"><attribute name="type">CP2</attribute></attribute>
 	<attribute name="marking"><attribute name="expr"><attribute name="numValue">0</attribute></attribute></attribute>
 </node>
 <node id="6" nodeType="place"> 
 	<attribute name="name">In2</attribute>
-	<attribute name="domain"><attribute name="type">position</attribute></attribute>
-	<attribute name="marking"><attribute name="token"><attribute name="occurs"><attribute name="intValue">1</attribute></attribute><attribute name="tokenProfile"><attribute name="expr"><attribute name="enumConst"><attribute name="type">position</attribute><attribute name="enumValue">n0</attribute></attribute></attribute></attribute></attribute></attribute>
+	<attribute name="domain"><attribute name="type">position2</attribute></attribute>
+	<attribute name="marking"><attribute name="token"><attribute name="occurs"><attribute name="intValue">1</attribute></attribute><attribute name="tokenProfile"><attribute name="expr"><attribute name="enumConst"><attribute name="type">position2</attribute><attribute name="enumValue">n0</attribute></attribute></attribute></attribute></attribute></attribute>
 </node>
 <node id="7" nodeType="place"> 
 	<attribute name="name">Out2</attribute>
-	<attribute name="domain"><attribute name="type">position</attribute></attribute>
-	<attribute name="marking"><attribute name="token"><attribute name="occurs"><attribute name="intValue">1</attribute></attribute><attribute name="tokenProfile"><attribute name="expr"><attribute name="enumConst"><attribute name="type">position</attribute><attribute name="enumValue">n0</attribute></attribute></attribute></attribute></attribute></attribute>
+	<attribute name="domain"><attribute name="type">position2</attribute></attribute>
+	<attribute name="marking"><attribute name="token"><attribute name="occurs"><attribute name="intValue">1</attribute></attribute><attribute name="tokenProfile"><attribute name="expr"><attribute name="enumConst"><attribute name="type">position2</attribute><attribute name="enumValue">n0</attribute></attribute></attribute></attribute></attribute></attribute>
 </node>
 <node id="8" nodeType="place"> 
 	<attribute name="name">S0</attribute><attribute name="marking"><attribute name="expr"><attribute name="numValue">1</attribute></attribute></attribute>
@@ -45,7 +45,7 @@
 	<attribute name="name">S1</attribute><attribute name="marking"><attribute name="expr"><attribute name="numValue">0</attribute></attribute></attribute>
 </node>
   <node id="10"  nodeType="transition">
-    <attribute name="name">T0</attribute>
+    <attribute name="name">InT0</attribute>
     <attribute name="distribution"> <attribute name="type">
 EXPONENTIAL</attribute><attribute name="param"><attribute name="number">0</attribute><attribute name="expr">	<attribute name="function"><attribute name="+"> 
 	<attribute name="function"><attribute name="+"> 
@@ -101,7 +101,7 @@ EXPONENTIAL</attribute><attribute name="param"><attribute name="number">0</attri
 	<attribute name="valuation"><attribute name="expr"><attribute name="numValue">1</attribute></attribute></attribute>
 </arc>
   <node id="16"  nodeType="transition">
-    <attribute name="name">T1</attribute>
+    <attribute name="name">InT1</attribute>
     <attribute name="distribution"> <attribute name="type">
 EXPONENTIAL</attribute><attribute name="param"><attribute name="number">0</attribute><attribute name="expr">	<attribute name="function"><attribute name="+"> 
 	<attribute name="function"><attribute name="+"> 
@@ -157,7 +157,7 @@ EXPONENTIAL</attribute><attribute name="param"><attribute name="number">0</attri
 	<attribute name="valuation"><attribute name="expr"><attribute name="numValue">1</attribute></attribute></attribute>
 </arc>
 <node id="22" nodeType="transition"> 
-	<attribute name="name">T2</attribute>
+	<attribute name="name">T_Q0_Q1_2</attribute>
 	<attribute name="priority"><attribute name="expr"><attribute name="numValue">1</attribute></attribute></attribute>
 	<attribute name="weight"><attribute name="expr"><attribute name="numValue">1</attribute></attribute></attribute>
 	<attribute name="isHorizontal"><attribute name="expr"><attribute name="boolValue">false</attribute></attribute></attribute>
@@ -173,20 +173,20 @@ EXPONENTIAL</attribute><attribute name="param"><attribute name="number">0</attri
 	<attribute name="valuation"><attribute name="expr"><attribute name="numValue">1</attribute></attribute></attribute>
 </arc>
 <arc id="26" arcType="arc" source="3" target="22">
-	<attribute name="valuation"><attribute name="token"><attribute name="occurs"><attribute name="intValue">1</attribute></attribute><attribute name="tokenProfile"><attribute name="expr"><attribute name="name">p</attribute></attribute></attribute></attribute></attribute>
+	<attribute name="valuation"><attribute name="token"><attribute name="occurs"><attribute name="intValue">1</attribute></attribute><attribute name="tokenProfile"><attribute name="expr"><attribute name="name">p1</attribute></attribute></attribute></attribute></attribute>
 </arc>
 <arc id="27" arcType="arc" source="22" target="3">
-	<attribute name="valuation"><attribute name="token"><attribute name="occurs"><attribute name="intValue">1</attribute></attribute><attribute name="tokenProfile"><attribute name="expr"><attribute name="function"><attribute name="++"><attribute name="name">p</attribute><attribute name="intValue">1</attribute></attribute></attribute></attribute></attribute></attribute></attribute>
+	<attribute name="valuation"><attribute name="token"><attribute name="occurs"><attribute name="intValue">1</attribute></attribute><attribute name="tokenProfile"><attribute name="expr"><attribute name="function"><attribute name="++"><attribute name="name">p1</attribute><attribute name="intValue">1</attribute></attribute></attribute></attribute></attribute></attribute></attribute>
 </arc>
 <arc id="28" arcType="arc" source="22" target="2">
-	<attribute name="valuation"><attribute name="token"><attribute name="occurs"><attribute name="intValue">1</attribute></attribute><attribute name="tokenProfile"><attribute name="expr"><attribute name="name">x</attribute></attribute><attribute name="expr"><attribute name="name">p</attribute></attribute></attribute></attribute></attribute>
+	<attribute name="valuation"><attribute name="token"><attribute name="occurs"><attribute name="intValue">1</attribute></attribute><attribute name="tokenProfile"><attribute name="expr"><attribute name="colorConst"><attribute name="type">client</attribute><attribute name="name">x1</attribute></attribute></attribute><attribute name="expr"><attribute name="name">p1</attribute></attribute></attribute></attribute></attribute>
 </arc>
 <node id="29" nodeType="transition"> 
-	<attribute name="name">T3</attribute>
+	<attribute name="name">T_Q1_Q2_3</attribute>
 	<attribute name="priority"><attribute name="expr"><attribute name="numValue">1</attribute></attribute></attribute>
 	<attribute name="weight"><attribute name="expr"><attribute name="numValue">1</attribute></attribute></attribute>
 	<attribute name="isHorizontal"><attribute name="expr"><attribute name="boolValue">false</attribute></attribute></attribute>
-	<attribute name="distribution"><attribute name="type">EXPONENTIAL</attribute><attribute name="param"><attribute name="number">0</attribute><attribute name="expr"><attribute name="numValue">6</attribute></attribute></attribute></attribute>
+	<attribute name="distribution"><attribute name="type">EXPONENTIAL</attribute><attribute name="param"><attribute name="number">0</attribute><attribute name="expr"><attribute name="numValue">2</attribute></attribute></attribute></attribute>
 </node>
 <arc id="30" arcType="arc" source="9" target="29">
 	<attribute name="valuation"><attribute name="expr"><attribute name="numValue">1</attribute></attribute></attribute>
@@ -195,29 +195,29 @@ EXPONENTIAL</attribute><attribute name="param"><attribute name="number">0</attri
 	<attribute name="valuation"><attribute name="expr"><attribute name="numValue">1</attribute></attribute></attribute>
 </arc>
 <arc id="32" arcType="arc" source="4" target="29">
-	<attribute name="valuation"><attribute name="token"><attribute name="occurs"><attribute name="intValue">1</attribute></attribute><attribute name="tokenProfile"><attribute name="expr"><attribute name="name">p</attribute></attribute></attribute></attribute></attribute>
+	<attribute name="valuation"><attribute name="token"><attribute name="occurs"><attribute name="intValue">1</attribute></attribute><attribute name="tokenProfile"><attribute name="expr"><attribute name="name">p1</attribute></attribute></attribute></attribute></attribute>
 </arc>
 <arc id="33" arcType="arc" source="29" target="4">
-	<attribute name="valuation"><attribute name="token"><attribute name="occurs"><attribute name="intValue">1</attribute></attribute><attribute name="tokenProfile"><attribute name="expr"><attribute name="function"><attribute name="++"><attribute name="name">p</attribute><attribute name="intValue">1</attribute></attribute></attribute></attribute></attribute></attribute></attribute>
+	<attribute name="valuation"><attribute name="token"><attribute name="occurs"><attribute name="intValue">1</attribute></attribute><attribute name="tokenProfile"><attribute name="expr"><attribute name="name">p1</attribute></attribute></attribute></attribute></attribute>
 </arc>
 <arc id="34" arcType="arc" source="2" target="29">
-	<attribute name="valuation"><attribute name="token"><attribute name="occurs"><attribute name="intValue">1</attribute></attribute><attribute name="tokenProfile"><attribute name="expr"><attribute name="name">x</attribute></attribute><attribute name="expr"><attribute name="name">p</attribute></attribute></attribute></attribute></attribute>
+	<attribute name="valuation"><attribute name="token"><attribute name="occurs"><attribute name="intValue">1</attribute></attribute><attribute name="tokenProfile"><attribute name="expr"><attribute name="colorConst"><attribute name="type">client</attribute><attribute name="name">x1</attribute></attribute></attribute><attribute name="expr"><attribute name="name">p1</attribute></attribute></attribute></attribute></attribute>
 </arc>
 <arc id="35" arcType="arc" source="6" target="29">
-	<attribute name="valuation"><attribute name="token"><attribute name="occurs"><attribute name="intValue">1</attribute></attribute><attribute name="tokenProfile"><attribute name="expr"><attribute name="name">p</attribute></attribute></attribute></attribute></attribute>
+	<attribute name="valuation"><attribute name="token"><attribute name="occurs"><attribute name="intValue">1</attribute></attribute><attribute name="tokenProfile"><attribute name="expr"><attribute name="name">p2</attribute></attribute></attribute></attribute></attribute>
 </arc>
 <arc id="36" arcType="arc" source="29" target="6">
-	<attribute name="valuation"><attribute name="token"><attribute name="occurs"><attribute name="intValue">1</attribute></attribute><attribute name="tokenProfile"><attribute name="expr"><attribute name="function"><attribute name="++"><attribute name="name">p</attribute><attribute name="intValue">1</attribute></attribute></attribute></attribute></attribute></attribute></attribute>
+	<attribute name="valuation"><attribute name="token"><attribute name="occurs"><attribute name="intValue">1</attribute></attribute><attribute name="tokenProfile"><attribute name="expr"><attribute name="function"><attribute name="++"><attribute name="name">p2</attribute><attribute name="intValue">1</attribute></attribute></attribute></attribute></attribute></attribute></attribute>
 </arc>
 <arc id="37" arcType="arc" source="29" target="5">
-	<attribute name="valuation"><attribute name="token"><attribute name="occurs"><attribute name="intValue">1</attribute></attribute><attribute name="tokenProfile"><attribute name="expr"><attribute name="name">x</attribute></attribute><attribute name="expr"><attribute name="name">p</attribute></attribute></attribute></attribute></attribute>
+	<attribute name="valuation"><attribute name="token"><attribute name="occurs"><attribute name="intValue">1</attribute></attribute><attribute name="tokenProfile"><attribute name="expr"><attribute name="colorConst"><attribute name="type">client</attribute><attribute name="name">x2</attribute></attribute></attribute><attribute name="expr"><attribute name="name">p2</attribute></attribute></attribute></attribute></attribute>
 </arc>
 <node id="38" nodeType="transition"> 
-	<attribute name="name">T4</attribute>
+	<attribute name="name">T_Q2_Q1_4</attribute>
 	<attribute name="priority"><attribute name="expr"><attribute name="numValue">1</attribute></attribute></attribute>
 	<attribute name="weight"><attribute name="expr"><attribute name="numValue">1</attribute></attribute></attribute>
 	<attribute name="isHorizontal"><attribute name="expr"><attribute name="boolValue">false</attribute></attribute></attribute>
-	<attribute name="distribution"><attribute name="type">EXPONENTIAL</attribute><attribute name="param"><attribute name="number">0</attribute><attribute name="expr"><attribute name="numValue">5</attribute></attribute></attribute></attribute>
+	<attribute name="distribution"><attribute name="type">EXPONENTIAL</attribute><attribute name="param"><attribute name="number">0</attribute><attribute name="expr"><attribute name="numValue">3</attribute></attribute></attribute></attribute>
 </node>
 <arc id="39" arcType="arc" source="9" target="38">
 	<attribute name="valuation"><attribute name="expr"><attribute name="numValue">1</attribute></attribute></attribute>
@@ -226,25 +226,25 @@ EXPONENTIAL</attribute><attribute name="param"><attribute name="number">0</attri
 	<attribute name="valuation"><attribute name="expr"><attribute name="numValue">1</attribute></attribute></attribute>
 </arc>
 <arc id="41" arcType="arc" source="7" target="38">
-	<attribute name="valuation"><attribute name="token"><attribute name="occurs"><attribute name="intValue">1</attribute></attribute><attribute name="tokenProfile"><attribute name="expr"><attribute name="name">p</attribute></attribute></attribute></attribute></attribute>
+	<attribute name="valuation"><attribute name="token"><attribute name="occurs"><attribute name="intValue">1</attribute></attribute><attribute name="tokenProfile"><attribute name="expr"><attribute name="name">p2</attribute></attribute></attribute></attribute></attribute>
 </arc>
 <arc id="42" arcType="arc" source="38" target="7">
-	<attribute name="valuation"><attribute name="token"><attribute name="occurs"><attribute name="intValue">1</attribute></attribute><attribute name="tokenProfile"><attribute name="expr"><attribute name="function"><attribute name="++"><attribute name="name">p</attribute><attribute name="intValue">1</attribute></attribute></attribute></attribute></attribute></attribute></attribute>
+	<attribute name="valuation"><attribute name="token"><attribute name="occurs"><attribute name="intValue">1</attribute></attribute><attribute name="tokenProfile"><attribute name="expr"><attribute name="name">p2</attribute></attribute></attribute></attribute></attribute>
 </arc>
 <arc id="43" arcType="arc" source="5" target="38">
-	<attribute name="valuation"><attribute name="token"><attribute name="occurs"><attribute name="intValue">1</attribute></attribute><attribute name="tokenProfile"><attribute name="expr"><attribute name="name">x</attribute></attribute><attribute name="expr"><attribute name="name">p</attribute></attribute></attribute></attribute></attribute>
+	<attribute name="valuation"><attribute name="token"><attribute name="occurs"><attribute name="intValue">1</attribute></attribute><attribute name="tokenProfile"><attribute name="expr"><attribute name="colorConst"><attribute name="type">client</attribute><attribute name="name">x2</attribute></attribute></attribute><attribute name="expr"><attribute name="name">p2</attribute></attribute></attribute></attribute></attribute>
 </arc>
 <arc id="44" arcType="arc" source="3" target="38">
-	<attribute name="valuation"><attribute name="token"><attribute name="occurs"><attribute name="intValue">1</attribute></attribute><attribute name="tokenProfile"><attribute name="expr"><attribute name="name">p</attribute></attribute></attribute></attribute></attribute>
+	<attribute name="valuation"><attribute name="token"><attribute name="occurs"><attribute name="intValue">1</attribute></attribute><attribute name="tokenProfile"><attribute name="expr"><attribute name="name">p1</attribute></attribute></attribute></attribute></attribute>
 </arc>
 <arc id="45" arcType="arc" source="38" target="3">
-	<attribute name="valuation"><attribute name="token"><attribute name="occurs"><attribute name="intValue">1</attribute></attribute><attribute name="tokenProfile"><attribute name="expr"><attribute name="function"><attribute name="++"><attribute name="name">p</attribute><attribute name="intValue">1</attribute></attribute></attribute></attribute></attribute></attribute></attribute>
+	<attribute name="valuation"><attribute name="token"><attribute name="occurs"><attribute name="intValue">1</attribute></attribute><attribute name="tokenProfile"><attribute name="expr"><attribute name="function"><attribute name="++"><attribute name="name">p1</attribute><attribute name="intValue">1</attribute></attribute></attribute></attribute></attribute></attribute></attribute>
 </arc>
 <arc id="46" arcType="arc" source="38" target="2">
-	<attribute name="valuation"><attribute name="token"><attribute name="occurs"><attribute name="intValue">1</attribute></attribute><attribute name="tokenProfile"><attribute name="expr"><attribute name="name">x</attribute></attribute><attribute name="expr"><attribute name="name">p</attribute></attribute></attribute></attribute></attribute>
+	<attribute name="valuation"><attribute name="token"><attribute name="occurs"><attribute name="intValue">1</attribute></attribute><attribute name="tokenProfile"><attribute name="expr"><attribute name="colorConst"><attribute name="type">client</attribute><attribute name="name">x1</attribute></attribute></attribute><attribute name="expr"><attribute name="name">p1</attribute></attribute></attribute></attribute></attribute>
 </arc>
 <node id="47" nodeType="transition"> 
-	<attribute name="name">T5</attribute>
+	<attribute name="name">DT_Q1_QD_5</attribute>
 	<attribute name="priority"><attribute name="expr"><attribute name="numValue">1</attribute></attribute></attribute>
 	<attribute name="weight"><attribute name="expr"><attribute name="numValue">1</attribute></attribute></attribute>
 	<attribute name="isHorizontal"><attribute name="expr"><attribute name="boolValue">false</attribute></attribute></attribute>
@@ -263,13 +263,13 @@ EXPONENTIAL</attribute><attribute name="param"><attribute name="number">0</attri
 	<attribute name="valuation"><attribute name="expr"><attribute name="numValue">0</attribute></attribute></attribute>
 </arc>
 <arc id="52" arcType="arc" source="4" target="47">
-	<attribute name="valuation"><attribute name="token"><attribute name="occurs"><attribute name="intValue">1</attribute></attribute><attribute name="tokenProfile"><attribute name="expr"><attribute name="name">p</attribute></attribute></attribute></attribute></attribute>
+	<attribute name="valuation"><attribute name="token"><attribute name="occurs"><attribute name="intValue">1</attribute></attribute><attribute name="tokenProfile"><attribute name="expr"><attribute name="name">p1</attribute></attribute></attribute></attribute></attribute>
 </arc>
 <arc id="53" arcType="arc" source="47" target="4">
-	<attribute name="valuation"><attribute name="token"><attribute name="occurs"><attribute name="intValue">1</attribute></attribute><attribute name="tokenProfile"><attribute name="expr"><attribute name="function"><attribute name="++"><attribute name="name">p</attribute><attribute name="intValue">1</attribute></attribute></attribute></attribute></attribute></attribute></attribute>
+	<attribute name="valuation"><attribute name="token"><attribute name="occurs"><attribute name="intValue">1</attribute></attribute><attribute name="tokenProfile"><attribute name="expr"><attribute name="name">p1</attribute></attribute></attribute></attribute></attribute>
 </arc>
 <arc id="54" arcType="arc" source="2" target="47">
-	<attribute name="valuation"><attribute name="token"><attribute name="occurs"><attribute name="intValue">1</attribute></attribute><attribute name="tokenProfile"><attribute name="expr"><attribute name="name">x</attribute></attribute><attribute name="expr"><attribute name="name">p</attribute></attribute></attribute></attribute></attribute>
+	<attribute name="valuation"><attribute name="token"><attribute name="occurs"><attribute name="intValue">1</attribute></attribute><attribute name="tokenProfile"><attribute name="expr"><attribute name="colorConst"><attribute name="type">client</attribute><attribute name="name">x1</attribute></attribute></attribute><attribute name="expr"><attribute name="name">p1</attribute></attribute></attribute></attribute></attribute>
 </arc>
 
 <node id="55" nodeType="place"> 
