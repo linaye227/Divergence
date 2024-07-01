@@ -38,7 +38,7 @@ do = {}
 di = {}
 L = []
 channelcount = 0
-out.write('<attribute name="declaration"><attribute name="constants"><attribute name="intConsts"><attribute name="intConst"><attribute name="name">NbClient</attribute><attribute name="expr"><attribute name="numValue">1</attribute></attribute></attribute><attribute name="intConst"><attribute name="name">NbPosition</attribute><attribute name="expr"><attribute name="numValue">1</attribute></attribute></attribute></attribute></attribute><attribute name="classDeclaration"><attribute name="name">client</attribute><attribute name="classType"><attribute name="classIntInterval"><attribute name="lowerBound">1</attribute><attribute name="higherBound"><attribute name="name">NbClient</attribute></attribute></attribute></attribute><attribute name="circular">false</attribute></attribute>')
+out.write('<attribute name="declaration"><attribute name="constants"><attribute name="intConsts"><attribute name="intConst"><attribute name="name">NbClient</attribute><attribute name="expr"><attribute name="numValue">1</attribute></attribute></attribute><attribute name="intConst"><attribute name="name">NbPosition</attribute><attribute name="expr"><attribute name="numValue">1</attribute></attribute></attribute></attribute></attribute><attribute name="classDeclaration"><attribute name="name">client</attribute><attribute name="classType"><attribute name="classEnum">')
 counter = 0
 sumw = 1
 for line in lines:
@@ -59,6 +59,9 @@ for line in lines:
                 do[j-1] = id
                 id+=1
             else :
+                for i in range(2):
+                    out.write('<attribute name="enumValue">x{}</attribute>'.format(i+1))
+                out.write('</attribute></attribute><attribute name="circular">false</attribute></attribute>')
                 for i in range(1,len(l)-1):
                     out.write('<attribute name="classDeclaration"><attribute name="name">position{}</attribute><attribute name="classType"><attribute name="classIntInterval"><attribute name="lowerBound">1</attribute><attribute name="higherBound"><attribute name="name">NbPosition</attribute></attribute></attribute></attribute><attribute name="circular">true</attribute></attribute>'.format(i))
                     out.write('<attribute name="domainDeclaration"><attribute name="name">CP{}</attribute><attribute name="domainType"><attribute name="cartesianProduct"><attribute name="type">client</attribute><attribute name="type">position{}</attribute></attribute></attribute></attribute>'.format(i,i))
@@ -81,8 +84,12 @@ for line in lines:
         sumw +=int(l[5])
         dw[int(l[1])]+=int(l[5])
         transid = id
-        out.write('<node id="{}" nodeType="transition"> \n\t<attribute name="name">T{}</attribute>\n\t<attribute name="priority"><attribute name="expr"><attribute name="numValue">1</attribute></attribute></attribute>\n\t<attribute name="weight"><attribute name="expr"><attribute name="numValue">1</attribute></attribute></attribute>\n\t<attribute name="isHorizontal"><attribute name="expr"><attribute name="boolValue">false</attribute></attribute></attribute>\n\t<attribute name="distribution"><attribute name="type">EXPONENTIAL</attribute><attribute name="param"><attribute name="number">0</attribute><attribute name="expr"><attribute name="numValue">{}</attribute></attribute></attribute></attribute>\n</node>\n'.format(id,transitioncount,l[5]))
-        id+=1
+        if (l[3][1]!='-'):
+            out.write('<node id="{}" nodeType="transition"> \n\t<attribute name="name">T_Q{}_Q{}_{}</attribute>\n\t<attribute name="priority"><attribute name="expr"><attribute name="numValue">1</attribute></attribute></attribute>\n\t<attribute name="weight"><attribute name="expr"><attribute name="numValue">1</attribute></attribute></attribute>\n\t<attribute name="isHorizontal"><attribute name="expr"><attribute name="boolValue">false</attribute></attribute></attribute>\n\t<attribute name="distribution"><attribute name="type">EXPONENTIAL</attribute><attribute name="param"><attribute name="number">0</attribute><attribute name="expr"><attribute name="numValue">{}</attribute></attribute></attribute></attribute>\n</node>\n'.format(id,l[2][1],l[3][1],transitioncount,l[5]))
+            id+=1
+        else :
+            out.write('<node id="{}" nodeType="transition"> \n\t<attribute name="name">DT_Q{}_Q{}_{}</attribute>\n\t<attribute name="priority"><attribute name="expr"><attribute name="numValue">1</attribute></attribute></attribute>\n\t<attribute name="weight"><attribute name="expr"><attribute name="numValue">1</attribute></attribute></attribute>\n\t<attribute name="isHorizontal"><attribute name="expr"><attribute name="boolValue">false</attribute></attribute></attribute>\n\t<attribute name="distribution"><attribute name="type">EXPONENTIAL</attribute><attribute name="param"><attribute name="number">0</attribute><attribute name="expr"><attribute name="numValue">{}</attribute></attribute></attribute></attribute>\n</node>\n'.format(id,l[2][1],'D',transitioncount,l[5]))
+            id+=1
         out.write('<arc id="{}" arcType="arc" source="{}" target="{}">\n\t<attribute name="valuation"><attribute name="expr"><attribute name="numValue">1</attribute></attribute></attribute>\n</arc>\n'.format(id,ds[int(l[1])],transid))
         id+=1
         out.write('<arc id="{}" arcType="arc" source="{}" target="{}">\n\t<attribute name="valuation"><attribute name="expr"><attribute name="numValue">1</attribute></attribute></attribute>\n</arc>\n'.format(id,transid,ds[int(l[4])]))
@@ -96,9 +103,9 @@ for line in lines:
         if (l[2][1]!='0'):
             out.write('<arc id="{}" arcType="arc" source="{}" target="{}">\n\t<attribute name="valuation"><attribute name="token"><attribute name="occurs"><attribute name="intValue">1</attribute></attribute><attribute name="tokenProfile"><attribute name="expr"><attribute name="name">p{}</attribute></attribute></attribute></attribute></attribute>\n</arc>\n'.format(id,do[int(l[2][1])],transid,int(l[2][1])))
             id+=1
-            out.write('<arc id="{}" arcType="arc" source="{}" target="{}">\n\t<attribute name="valuation"><attribute name="token"><attribute name="occurs"><attribute name="intValue">1</attribute></attribute><attribute name="tokenProfile"><attribute name="expr"><attribute name="function"><attribute name="++"><attribute name="name">p{}</attribute><attribute name="intValue">1</attribute></attribute></attribute></attribute></attribute></attribute></attribute>\n</arc>\n'.format(id,transid,do[int(l[2][1])],int(l[2][1])))
+            out.write('<arc id="{}" arcType="arc" source="{}" target="{}">\n\t<attribute name="valuation"><attribute name="token"><attribute name="occurs"><attribute name="intValue">1</attribute></attribute><attribute name="tokenProfile"><attribute name="expr"><attribute name="name">p{}</attribute></attribute></attribute></attribute></attribute>\n</arc>\n'.format(id,transid,do[int(l[2][1])],int(l[2][1])))
             id+=1
-            out.write('<arc id="{}" arcType="arc" source="{}" target="{}">\n\t<attribute name="valuation"><attribute name="token"><attribute name="occurs"><attribute name="intValue">1</attribute></attribute><attribute name="tokenProfile"><attribute name="expr"><attribute name="name">x</attribute></attribute><attribute name="expr"><attribute name="name">p{}</attribute></attribute></attribute></attribute></attribute>\n</arc>\n'.format(id,dc[int(l[2][1])],transid,int(l[2][1])))
+            out.write('<arc id="{}" arcType="arc" source="{}" target="{}">\n\t<attribute name="valuation"><attribute name="token"><attribute name="occurs"><attribute name="intValue">1</attribute></attribute><attribute name="tokenProfile"><attribute name="expr"><attribute name="colorConst"><attribute name="type">client</attribute><attribute name="name">x{}</attribute></attribute></attribute><attribute name="expr"><attribute name="name">p{}</attribute></attribute></attribute></attribute></attribute>\n</arc>\n'.format(id,dc[int(l[2][1])],transid,ord(l[2][3])-96,int(l[2][1])))
             id+=1
         else:
             out.write('<arc id="{}" arcType="arc" source="{}" target="{}">\n\t<attribute name="valuation"><attribute name="expr"><attribute name="numValue">1</attribute></attribute></attribute>\n</arc>\n'.format(id,dc[int(l[2][1])],transid))
@@ -108,7 +115,7 @@ for line in lines:
             id+=1
             out.write('<arc id="{}" arcType="arc" source="{}" target="{}">\n\t<attribute name="valuation"><attribute name="token"><attribute name="occurs"><attribute name="intValue">1</attribute></attribute><attribute name="tokenProfile"><attribute name="expr"><attribute name="function"><attribute name="++"><attribute name="name">p{}</attribute><attribute name="intValue">1</attribute></attribute></attribute></attribute></attribute></attribute></attribute>\n</arc>\n'.format(id,transid,di[int(l[3][1])],int(l[3][1])))
             id+=1
-            out.write('<arc id="{}" arcType="arc" source="{}" target="{}">\n\t<attribute name="valuation"><attribute name="token"><attribute name="occurs"><attribute name="intValue">1</attribute></attribute><attribute name="tokenProfile"><attribute name="expr"><attribute name="name">x</attribute></attribute><attribute name="expr"><attribute name="name">p{}</attribute></attribute></attribute></attribute></attribute>\n</arc>\n'.format(id,transid,dc[int(l[3][1])],int(l[3][1])))
+            out.write('<arc id="{}" arcType="arc" source="{}" target="{}">\n\t<attribute name="valuation"><attribute name="token"><attribute name="occurs"><attribute name="intValue">1</attribute></attribute><attribute name="tokenProfile"><attribute name="expr"><attribute name="colorConst"><attribute name="type">client</attribute><attribute name="name">x{}</attribute></attribute></attribute><attribute name="expr"><attribute name="name">p{}</attribute></attribute></attribute></attribute></attribute>\n</arc>\n'.format(id,transid,dc[int(l[3][1])],ord(l[3][3])-96,int(l[3][1])))
             id+=1
     else:
         ll = []
@@ -129,7 +136,7 @@ for line in lines:
             start+=start2+end2
             if (j>1):
                 start+= '\t</attribute></attribute> \n'
-        s = printGRML_OneTransition(str(id),"T"+str(transitioncount),"EXPONENTIAL",start,"0",str(1),"")
+        s = printGRML_OneTransition(str(id),"InT"+str(transitioncount),"EXPONENTIAL",start,"0",str(1),"")
         transid = id
         transitioncount+=1
         id+=1
