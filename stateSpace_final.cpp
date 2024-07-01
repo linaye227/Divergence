@@ -33,7 +33,7 @@
 #include <fstream>
 #include <iostream>
 #include <set>
-#include <bits/stdc++.h>
+#include <iostream>
 #include "sparse_io.hpp"
 
 namespace boostmat = boost::numeric::ublas;
@@ -79,7 +79,7 @@ long double f1(long double count, long double epsylon){
 map <vector<int>,int> mp;
 int cmax = 2;
 int pmax = 196;
-int cno = 3;
+int cno = 2;
 int sno = 2;
 void stateSpace::exploreStateSpace() {
   // apply a Dijkstra algorithm on the product of the SPN an the LHA to produce
@@ -185,7 +185,8 @@ void stateSpace::exploreStateSpace() {
               // cerr << "HERE\n";
               numb2 = stoi(num1);
               if (numb1==0){
-
+                // for (auto i : marking) cerr << i << " ";
+                // cerr << endl;
               }
               else if (numb1==numb2){
                 for (int i=2+(numb1-1)*((cmax+2)*pmax);i<2+(numb1-1)*((cmax+2)*pmax)+(cmax)*pmax-1;i++){
@@ -435,14 +436,21 @@ void stateSpace::buildTransitionMatrix() {
               else break;
             }
             int numb1 = stoi(num1);
-            for (int i=cmax+1+(numb1-1)*((cmax+2)*pmax);i<cmax+1+(numb1-1)*((cmax+2)*pmax)+(cmax+1)*pmax-1;i++){
+            for (int i=2+(numb1-1)*((cmax+2)*pmax);i<2+(numb1-1)*((cmax+2)*pmax)+(cmax)*pmax-1;i++){
               marking[i] = marking[i+1];
             }
-            marking[cmax+1+(numb1-1)*((cmax+2)*pmax)+(cmax+1)*pmax-1] = 0;
+            marking[2+(numb1-1)*((cmax+2)*pmax)+(cmax)*pmax-1] = 0;
+            for (int i=2+(numb1-1)*((cmax+2)*pmax) + cmax*pmax;i<2+(numb1-1)*((cmax+2)*pmax)+(cmax)*pmax + pmax - 1;i++){
+              if (marking[i]==0 && marking[i+1]==1 ) {
+                marking[i] = 1;
+                marking[i+1]  =0;
+                break;
+              }
+            }
           }
           else {
             string num1 = "";
-            int numb1,numb2;
+            int numb1=0,numb2;
             int undercount = 0;
             for (int i=3;i<lab.size();i++){
               if (lab[i]!='_') {
@@ -459,22 +467,34 @@ void stateSpace::buildTransitionMatrix() {
             // cerr << "HERE\n";
             numb2 = stoi(num1);
             if (numb1==0){
-
+              for (auto i : marking) cerr << i << " ";
+              cerr << endl;
             }
             else if (numb1==numb2){
-              for (int i=cmax+1+(numb1-1)*((cmax+2)*pmax);i<cmax+1+(numb1-1)*((cmax+2)*pmax)+(cmax)*pmax-1;i++){
+              for (int i=2+(numb1-1)*((cmax+2)*pmax);i<2+(numb1-1)*((cmax+2)*pmax)+(cmax)*pmax-1;i++){
                 marking[i] = marking[i+1];
               }
-              marking[cmax+1+(numb1-1)*((cmax+2)*pmax)+(cmax)*pmax-1] = 0;
+              marking[2+(numb1-1)*((cmax+2)*pmax)+(cmax)*pmax-1] = 0;
+              for (int i=2+(numb1-1)*((cmax+2)*pmax) + cmax*pmax;i<2+(numb1-1)*((cmax+2)*pmax)+(cmax)*pmax + pmax - 1;i++){
+                if (marking[i]==0 && marking[i+1]==1 ) {
+                  marking[i] = 1;
+                  marking[i+1]  =0;
+                  break;
+                }
+              }
             }
             else {
-              for (int i=cmax+1+(numb1-1)*((cmax+2)*pmax);i<cmax+1+(numb1-1)*((cmax+2)*pmax)+(cmax)*pmax-1;i+=pmax){
-                marking[i] = 0;
-              }
-              for (int i=cmax+1+(numb1-1)*((cmax+2)*pmax);i<cmax+1+(numb1-1)*((cmax+2)*pmax)+(cmax+1)*pmax-1;i++){
+              for (int i=2+(numb1-1)*((cmax+2)*pmax);i<2+(numb1-1)*((cmax+2)*pmax)+(cmax)*pmax-1;i++){
                 marking[i] = marking[i+1];
               }
-              marking[cmax+1+(numb1-1)*((cmax+2)*pmax)+(cmax+1)*pmax-1] = 0;
+              marking[2+(numb1-1)*((cmax+2)*pmax)+(cmax)*pmax-1] = 0;
+              for (int i=2+(numb1-1)*((cmax+2)*pmax) + cmax*pmax;i<2+(numb1-1)*((cmax+2)*pmax)+(cmax)*pmax + pmax - 1;i++){
+                if (marking[i]==0 && marking[i+1]==1 ) {
+                  marking[i] = 1;
+                  marking[i+1]  =0;
+                  break;
+                }
+              }
             }
           }
           marking.push_back(A.CurrentLocation);
