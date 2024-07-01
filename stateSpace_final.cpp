@@ -62,7 +62,7 @@ void stateSpace::add_state(vector<int> v) {
   // cerr << endl;
   findstate->push_back(*v2);
   nbState++;
-  if ((nbState % 100000) == 0)
+  if ((nbState % 100) == 0)
     cerr << "Number of states :" << nbState << endl;
 }
 set <vector <int>> Aprime;
@@ -77,9 +77,9 @@ long double f1(long double count, long double epsylon){
   return ans;
 }
 map <vector<int>,int> mp;
-int cmax = 1;
+int cmax = 2;
 int pmax = 196;
-int cno = 2;
+int cno = 3;
 int sno = 2;
 void stateSpace::exploreStateSpace() {
   // apply a Dijkstra algorithm on the product of the SPN an the LHA to produce
@@ -154,14 +154,21 @@ void stateSpace::exploreStateSpace() {
                 else break;
               }
               int numb1 = stoi(num1);
-              for (int i=cmax+1+(numb1-1)*((cmax+2)*pmax);i<cmax+1+(numb1-1)*((cmax+2)*pmax)+(cmax+1)*pmax-1;i++){
+              for (int i=2+(numb1-1)*((cmax+2)*pmax);i<2+(numb1-1)*((cmax+2)*pmax)+(cmax)*pmax-1;i++){
                 marking[i] = marking[i+1];
               }
-              marking[cmax+1+(numb1-1)*((cmax+2)*pmax)+(cmax+1)*pmax-1] = 0;
+              marking[2+(numb1-1)*((cmax+2)*pmax)+(cmax)*pmax-1] = 0;
+              for (int i=2+(numb1-1)*((cmax+2)*pmax) + cmax*pmax;i<2+(numb1-1)*((cmax+2)*pmax)+(cmax)*pmax + pmax - 1;i++){
+                if (marking[i]==0 && marking[i+1]==1 ) {
+                  marking[i] = 1;
+                  marking[i+1]  =0;
+                  break;
+                }
+              }
             }
             else {
               string num1 = "";
-              int numb1,numb2;
+              int numb1=0,numb2;
               int undercount = 0;
               for (int i=3;i<lab.size();i++){
                 if (lab[i]!='_') {
@@ -181,19 +188,30 @@ void stateSpace::exploreStateSpace() {
 
               }
               else if (numb1==numb2){
-                for (int i=cmax+1+(numb1-1)*((cmax+2)*pmax);i<cmax+1+(numb1-1)*((cmax+2)*pmax)+(cmax)*pmax-1;i++){
+                for (int i=2+(numb1-1)*((cmax+2)*pmax);i<2+(numb1-1)*((cmax+2)*pmax)+(cmax)*pmax-1;i++){
                   marking[i] = marking[i+1];
                 }
-                marking[cmax+1+(numb1-1)*((cmax+2)*pmax)+(cmax)*pmax-1] = 0;
+                marking[2+(numb1-1)*((cmax+2)*pmax)+(cmax)*pmax-1] = 0;
+                for (int i=2+(numb1-1)*((cmax+2)*pmax) + cmax*pmax;i<2+(numb1-1)*((cmax+2)*pmax)+(cmax)*pmax + pmax - 1;i++){
+                  if (marking[i]==0 && marking[i+1]==1 ) {
+                    marking[i] = 1;
+                    marking[i+1]  =0;
+                    break;
+                  }
+                }
               }
               else {
-                for (int i=cmax+1+(numb1-1)*((cmax+2)*pmax);i<cmax+1+(numb1-1)*((cmax+2)*pmax)+(cmax)*pmax-1;i+=pmax){
-                  marking[i] = 0;
-                }
-                for (int i=cmax+1+(numb1-1)*((cmax+2)*pmax);i<cmax+1+(numb1-1)*((cmax+2)*pmax)+(cmax+1)*pmax-1;i++){
+                for (int i=2+(numb1-1)*((cmax+2)*pmax);i<2+(numb1-1)*((cmax+2)*pmax)+(cmax)*pmax-1;i++){
                   marking[i] = marking[i+1];
                 }
-                marking[cmax+1+(numb1-1)*((cmax+2)*pmax)+(cmax+1)*pmax-1] = 0;
+                marking[2+(numb1-1)*((cmax+2)*pmax)+(cmax)*pmax-1] = 0;
+                for (int i=2+(numb1-1)*((cmax+2)*pmax) + cmax*pmax;i<2+(numb1-1)*((cmax+2)*pmax)+(cmax)*pmax + pmax - 1;i++){
+                  if (marking[i]==0 && marking[i+1]==1 ) {
+                    marking[i] = 1;
+                    marking[i+1]  =0;
+                    break;
+                  }
+                }
               }
             }
             if (mp[marking]==0){
@@ -214,6 +232,9 @@ void stateSpace::exploreStateSpace() {
               else if (marking[0]==1){
                 marking.push_back(A.CurrentLocation);
                 cerr << "The State when it enters A' " << nbState << endl;
+                cerr << lab << endl; 
+                for (auto i : place) cerr << i << " ";
+                cerr << endl;
                 for (auto i : marking) cerr << i << " ";
                 cerr << endl;
                 auto its = S.find(&marking);
@@ -226,8 +247,8 @@ void stateSpace::exploreStateSpace() {
                 marking.push_back(A.CurrentLocation);
                 auto its = S.find(&marking);
                 if (its == S.end()) {
-                    AlmostLoose1.insert(marking);
-                    add_state(marking);
+                  AlmostLoose1.insert(marking);
+                  add_state(marking);
                 }
               }
               else{
@@ -401,9 +422,9 @@ void stateSpace::buildTransitionMatrix() {
         N.fire(t, b, 0.0);
         vector<int> marking = N.getState().getVector();
         int SE = A.synchroniseWith(t, N.getState(), b);
+        string lab = N.Transition[t].label;
         if (SE > -1) {
           N.unfire(t, b);
-          string lab = N.Transition[t].label;
           if (lab[0]=='I'){
             
           }
@@ -462,7 +483,6 @@ void stateSpace::buildTransitionMatrix() {
           // cerr << N.ParamDistr[0] << ", ";
           int j = findHash(&marking);
           mat(i, j) = N.ParamDistr[0];
-
           /*cerr << "->state:";
            for (auto it2=marking.begin(); it2!= marking.end() ; it2++) {
            cerr << *it2 << ":";
@@ -647,13 +667,21 @@ void stateSpace::outputPrism() {
 
   fstream outputMatrixFile;
   outputMatrixFile.open("prismMatrix.tra", fstream::out);
-  outputMatrixFile << nbState << " " << nbTrans << endl;
-
+  long long transnum =0;
   for (auto it1 = transitionsMatrix->begin1(); it1 != transitionsMatrix->end1();
        it1++) {
     for (auto it2 = it1.begin(); it2 != it1.end(); it2++) {
       if (*it2 >= (1e-16)) {
-        outputMatrixFile << it2.index1() << " " << it2.index2() << " " << *it2
+        transnum+=1;
+      }
+    }
+  }
+  outputMatrixFile << nbState << " " << transnum << endl;
+  for (auto it1 = transitionsMatrix->begin1(); it1 != transitionsMatrix->end1();
+       it1++) {
+    for (auto it2 = it1.begin(); it2 != it1.end(); it2++) {
+      if (*it2 >= (1e-16)) {
+        outputMatrixFile << it2.index1() << " " << it2.index2() << " " << (*it2)
                          << endl;
       }
     }
@@ -662,7 +690,7 @@ void stateSpace::outputPrism() {
 
   fstream outputProperty;
   outputProperty.open("prismProperty.pctl", fstream::out);
-  outputProperty << "P=? [ F Count=1";
+  outputProperty << "P=? [ (true) U  (Count=1";
   // bool first = true;
   // int lhaloc = A.CurrentLocation;
   // for (int it = 0; it < (int)A.NbLoc; ++it) {
@@ -677,12 +705,12 @@ void stateSpace::outputPrism() {
   //   }
   // }
   // A.CurrentLocation = lhaloc;
-  outputProperty << "]";
+  outputProperty << ")]";
   outputProperty.close();
 
   fstream outputLabel;
   outputLabel.open("prismLabel.lbl", fstream::out);
-  outputLabel << "0='init' 1='deadlock'\n 1: 0";
+  outputLabel << "0='init' 1='deadlock'\n 0: 0";
   outputLabel.close();
 }
 
