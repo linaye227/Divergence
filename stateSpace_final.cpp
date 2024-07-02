@@ -33,7 +33,7 @@
 #include <fstream>
 #include <iostream>
 #include <set>
-#include <iostream>
+#include <bits/stdc++.h>
 #include "sparse_io.hpp"
 
 namespace boostmat = boost::numeric::ublas;
@@ -62,7 +62,7 @@ void stateSpace::add_state(vector<int> v) {
   // cerr << endl;
   findstate->push_back(*v2);
   nbState++;
-  if ((nbState % 100) == 0)
+  if ((nbState % 100000) == 0)
     cerr << "Number of states :" << nbState << endl;
 }
 set <vector <int>> Aprime;
@@ -467,8 +467,8 @@ void stateSpace::buildTransitionMatrix() {
             // cerr << "HERE\n";
             numb2 = stoi(num1);
             if (numb1==0){
-              for (auto i : marking) cerr << i << " ";
-              cerr << endl;
+              // for (auto i : marking) cerr << i << " ";
+              // cerr << endl;
             }
             else if (numb1==numb2){
               for (int i=2+(numb1-1)*((cmax+2)*pmax);i<2+(numb1-1)*((cmax+2)*pmax)+(cmax)*pmax-1;i++){
@@ -730,7 +730,7 @@ void stateSpace::outputPrism() {
 
   fstream outputLabel;
   outputLabel.open("prismLabel.lbl", fstream::out);
-  outputLabel << "0='init' 1='deadlock'\n 0: 0";
+  outputLabel << "0='init' 1='deadlock'\n 3: 0";
   outputLabel.close();
 }
 
