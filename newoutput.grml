@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model formalismUrl="http://formalisms.cosyverif.org/sptgd-net.fml" xmlns="http://cosyverif.org/ns/model">
+<attribute name="declaration"><attribute name="constants"><attribute name="intConsts"><attribute name="intConst"><attribute name="name">NbClient</attribute><attribute name="expr"><attribute name="numValue">2</attribute></attribute></attribute><attribute name="intConst"><attribute name="name">NbPosition</attribute><attribute name="expr"><attribute name="numValue">48</attribute></attribute></attribute></attribute></attribute><attribute name="classDeclaration"><attribute name="name">client</attribute><attribute name="classType"><attribute name="classEnum"><attribute name="enumValue">x1</attribute><attribute name="enumValue">x2</attribute></attribute></attribute><attribute name="circular">false</attribute></attribute><attribute name="classDeclaration"><attribute name="name">position1</attribute><attribute name="classType"><attribute name="classIntInterval"><attribute name="lowerBound">1</attribute><attribute name="higherBound"><attribute name="name">NbPosition</attribute></attribute></attribute></attribute><attribute name="circular">true</attribute></attribute><attribute name="domainDeclaration"><attribute name="name">CP1</attribute><attribute name="domainType"><attribute name="cartesianProduct"><attribute name="type">client</attribute><attribute name="type">position1</attribute></attribute></attribute></attribute><attribute name="classDeclaration"><attribute name="name">position2</attribute><attribute name="classType"><attribute name="classIntInterval"><attribute name="lowerBound">1</attribute><attribute name="higherBound"><attribute name="name">NbPosition</attribute></attribute></attribute></attribute><attribute name="circular">true</attribute></attribute><attribute name="domainDeclaration"><attribute name="name">CP2</attribute><attribute name="domainType"><attribute name="cartesianProduct"><attribute name="type">client</attribute><attribute name="type">position2</attribute></attribute></attribute></attribute><attribute name="variableDeclaration"><attribute name="name">p1</attribute><attribute name="type">position1</attribute></attribute><attribute name="variableDeclaration"><attribute name="name">p2</attribute><attribute name="type">position2</attribute></attribute><attribute name="variableDeclaration"><attribute name="name">x</attribute><attribute name="type">client</attribute></attribute></attribute>
+<node id="0" nodeType="place"> 
+	<attribute name="name">Count</attribute><attribute name="marking"><attribute name="expr"><attribute name="numValue">1</attribute></attribute></attribute>
+</node>
+<node id="1" nodeType="place">
+	<attribute name="name">C0</attribute>
+	<attribute name="marking"><attribute name="expr"><attribute name="numValue">0</attribute></attribute></attribute>
+</node>
+<node id="2" nodeType="place"> 
+	<attribute name="name">C1</attribute>
+	<attribute name="domain"><attribute name="type">CP1</attribute></attribute>
+	<attribute name="marking"><attribute name="expr"><attribute name="numValue">0</attribute></attribute></attribute>
+</node>
+<node id="3" nodeType="place"> 
+	<attribute name="name">In1</attribute>
+	<attribute name="domain"><attribute name="type">position1</attribute></attribute>
+	<attribute name="marking"><attribute name="token"><attribute name="occurs"><attribute name="intValue">1</attribute></attribute><attribute name="tokenProfile"><attribute name="expr"><attribute name="enumConst"><attribute name="type">position1</attribute><attribute name="enumValue">n0</attribute></attribute></attribute></attribute></attribute></attribute>
+</node>
+<node id="4" nodeType="place"> 
+	<attribute name="name">C2</attribute>
+	<attribute name="domain"><attribute name="type">CP2</attribute></attribute>
+	<attribute name="marking"><attribute name="expr"><attribute name="numValue">0</attribute></attribute></attribute>
+</node>
+<node id="5" nodeType="place"> 
+	<attribute name="name">In2</attribute>
+	<attribute name="domain"><attribute name="type">position2</attribute></attribute>
+	<attribute name="marking"><attribute name="token"><attribute name="occurs"><attribute name="intValue">1</attribute></attribute><attribute name="tokenProfile"><attribute name="expr"><attribute name="enumConst"><attribute name="type">position2</attribute><attribute name="enumValue">n0</attribute></attribute></attribute></attribute></attribute></attribute>
+</node>
+<node id="6" nodeType="place"> 
+	<attribute name="name">S0</attribute><attribute name="marking"><attribute name="expr"><attribute name="numValue">1</attribute></attribute></attribute>
+</node>
+<node id="7" nodeType="place"> 
+	<attribute name="name">S1</attribute><attribute name="marking"><attribute name="expr"><attribute name="numValue">0</attribute></attribute></attribute>
+</node>
+  <node id="8"  nodeType="transition">
+    <attribute name="name">InT0</attribute>
+    <attribute name="distribution"> <attribute name="type">
+EXPONENTIAL</attribute><attribute name="param"><attribute name="number">0</attribute><attribute name="expr">	<attribute name="function"><attribute name="+"> 
+	<attribute name="function"><attribute name="+"> 
+	<attribute name="function"><attribute name="+"> 
+	<attribute name="numValue">2</attribute>
+	<attribute name="function"><attribute name="*"> 
+	<attribute name="numValue">1</attribute>
+	<attribute name="function"><attribute name="-"><attribute name="name">Count</attribute><attribute name="numValue">1</attribute>
+	</attribute></attribute></attribute></attribute> 
+	</attribute></attribute> 
+	<attribute name="function"><attribute name="*"> 
+	<attribute name="function"><attribute name="*"> 
+	<attribute name="numValue">1</attribute>
+	<attribute name="function"><attribute name="-"><attribute name="name">Count</attribute><attribute name="numValue">1</attribute>
+	</attribute></attribute></attribute></attribute> 
+	<attribute name="function"><attribute name="-"><attribute name="name">Count</attribute><attribute name="numValue">1</attribute>
+	</attribute></attribute></attribute></attribute> 
+	</attribute></attribute> 
+	<attribute name="function"><attribute name="*"> 
+	<attribute name="function"><attribute name="*"> 
+	<attribute name="function"><attribute name="*"> 
+	<attribute name="numValue">0</attribute>
+	<attribute name="function"><attribute name="-"><attribute name="name">Count</attribute><attribute name="numValue">1</attribute>
+	</attribute></attribute></attribute></attribute> 
+	<attribute name="function"><attribute name="-"><attribute name="name">Count</attribute><attribute name="numValue">1</attribute>
+	</attribute></attribute></attribute></attribute> 
+	<attribute name="function"><attribute name="-"><attribute name="name">Count</attribute><attribute name="numValue">1</attribute>
+	</attribute></attribute></attribute></attribute> 
+	</attribute></attribute> 
+    </attribute></attribute>
+    </attribute>
+    <attribute name="priority"><attribute name="expr">
+    <attribute name="numValue">0</attribute>
+    </attribute></attribute>
+    <attribute name="weight"><attribute name="expr">
+    <attribute name="numValue">1</attribute>
+    </attribute></attribute>
+    
+  </node>
+<arc id="9" arcType="arc" source="0" target="8">
+	<attribute name="valuation"><attribute name="expr"><attribute name="numValue">1</attribute></attribute></attribute>
+</arc>
+<arc id="10" arcType="arc" source="8" target="1">
+	<attribute name="valuation"><attribute name="token"><attribute name="occurs"><attribute name="intValue">1</attribute></attribute><attribute name="tokenProfile"><attribute name="expr"><attribute name="name">x</attribute></attribute></attribute></attribute></attribute>
+</arc>
+<arc id="11" arcType="arc" source="8" target="0">
+	<attribute name="valuation"><attribute name="expr"><attribute name="numValue">2</attribute></attribute></attribute>
+</arc>
+<arc id="12" arcType="arc" source="6" target="8">
+	<attribute name="valuation"><attribute name="expr"><attribute name="numValue">1</attribute></attribute></attribute>
+</arc>
+<arc id="13" arcType="arc" source="8" target="6">
+	<attribute name="valuation"><attribute name="expr"><attribute name="numValue">1</attribute></attribute></attribute>
+</arc>
+  <node id="14"  nodeType="transition">
+    <attribute name="name">InT1</attribute>
+    <attribute name="distribution"> <attribute name="type">
+EXPONENTIAL</attribute><attribute name="param"><attribute name="number">0</attribute><attribute name="expr">	<attribute name="function"><attribute name="+"> 
+	<attribute name="function"><attribute name="+"> 
+	<attribute name="function"><attribute name="+"> 
+	<attribute name="numValue">1</attribute>
+	<attribute name="function"><attribute name="*"> 
+	<attribute name="numValue">0</attribute>
+	<attribute name="function"><attribute name="-"><attribute name="name">Count</attribute><attribute name="numValue">1</attribute>
+	</attribute></attribute></attribute></attribute> 
+	</attribute></attribute> 
+	<attribute name="function"><attribute name="*"> 
+	<attribute name="function"><attribute name="*"> 
+	<attribute name="numValue">0</attribute>
+	<attribute name="function"><attribute name="-"><attribute name="name">Count</attribute><attribute name="numValue">1</attribute>
+	</attribute></attribute></attribute></attribute> 
+	<attribute name="function"><attribute name="-"><attribute name="name">Count</attribute><attribute name="numValue">1</attribute>
+	</attribute></attribute></attribute></attribute> 
+	</attribute></attribute> 
+	<attribute name="function"><attribute name="*"> 
+	<attribute name="function"><attribute name="*"> 
+	<attribute name="function"><attribute name="*"> 
+	<attribute name="numValue">1</attribute>
+	<attribute name="function"><attribute name="-"><attribute name="name">Count</attribute><attribute name="numValue">1</attribute>
+	</attribute></attribute></attribute></attribute> 
+	<attribute name="function"><attribute name="-"><attribute name="name">Count</attribute><attribute name="numValue">1</attribute>
+	</attribute></attribute></attribute></attribute> 
+	<attribute name="function"><attribute name="-"><attribute name="name">Count</attribute><attribute name="numValue">1</attribute>
+	</attribute></attribute></attribute></attribute> 
+	</attribute></attribute> 
+    </attribute></attribute>
+    </attribute>
+    <attribute name="priority"><attribute name="expr">
+    <attribute name="numValue">0</attribute>
+    </attribute></attribute>
+    <attribute name="weight"><attribute name="expr">
+    <attribute name="numValue">1</attribute>
+    </attribute></attribute>
+    
+  </node>
+<arc id="15" arcType="arc" source="0" target="14">
+	<attribute name="valuation"><attribute name="expr"><attribute name="numValue">1</attribute></attribute></attribute>
+</arc>
+<arc id="16" arcType="arc" source="14" target="1">
+	<attribute name="valuation"><attribute name="token"><attribute name="occurs"><attribute name="intValue">1</attribute></attribute><attribute name="tokenProfile"><attribute name="expr"><attribute name="name">x</attribute></attribute></attribute></attribute></attribute>
+</arc>
+<arc id="17" arcType="arc" source="14" target="0">
+	<attribute name="valuation"><attribute name="expr"><attribute name="numValue">2</attribute></attribute></attribute>
+</arc>
+<arc id="18" arcType="arc" source="7" target="14">
+	<attribute name="valuation"><attribute name="expr"><attribute name="numValue">1</attribute></attribute></attribute>
+</arc>
+<arc id="19" arcType="arc" source="14" target="7">
+	<attribute name="valuation"><attribute name="expr"><attribute name="numValue">1</attribute></attribute></attribute>
+</arc>
+<node id="20" nodeType="transition"> 
+	<attribute name="name">T_Q0_Q1_2</attribute>
+	<attribute name="priority"><attribute name="expr"><attribute name="numValue">1</attribute></attribute></attribute>
+	<attribute name="weight"><attribute name="expr"><attribute name="numValue">1</attribute></attribute></attribute>
+	<attribute name="isHorizontal"><attribute name="expr"><attribute name="boolValue">false</attribute></attribute></attribute>
+	<attribute name="distribution"><attribute name="type">EXPONENTIAL</attribute><attribute name="param"><attribute name="number">0</attribute><attribute name="expr"><attribute name="numValue">5</attribute></attribute></attribute></attribute>
+</node>
+<arc id="21" arcType="arc" source="6" target="20">
+	<attribute name="valuation"><attribute name="expr"><attribute name="numValue">1</attribute></attribute></attribute>
+</arc>
+<arc id="22" arcType="arc" source="20" target="7">
+	<attribute name="valuation"><attribute name="expr"><attribute name="numValue">1</attribute></attribute></attribute>
+</arc>
+<arc id="23" arcType="arc" source="1" target="20">
+	<attribute name="valuation"><attribute name="expr"><attribute name="numValue">1</attribute></attribute></attribute>
+</arc>
+<arc id="24" arcType="arc" source="3" target="20">
+	<attribute name="valuation"><attribute name="token"><attribute name="occurs"><attribute name="intValue">1</attribute></attribute><attribute name="tokenProfile"><attribute name="expr"><attribute name="name">p1</attribute></attribute></attribute></attribute></attribute>
+</arc>
+<arc id="25" arcType="arc" source="20" target="3">
+	<attribute name="valuation"><attribute name="token"><attribute name="occurs"><attribute name="intValue">1</attribute></attribute><attribute name="tokenProfile"><attribute name="expr"><attribute name="function"><attribute name="++"><attribute name="name">p1</attribute><attribute name="intValue">1</attribute></attribute></attribute></attribute></attribute></attribute></attribute>
+</arc>
+<arc id="26" arcType="arc" source="20" target="2">
+	<attribute name="valuation"><attribute name="token"><attribute name="occurs"><attribute name="intValue">1</attribute></attribute><attribute name="tokenProfile"><attribute name="expr"><attribute name="colorConst"><attribute name="type">client</attribute><attribute name="name">x1</attribute></attribute></attribute><attribute name="expr"><attribute name="name">p1</attribute></attribute></attribute></attribute></attribute>
+</arc>
+<node id="27" nodeType="transition"> 
+	<attribute name="name">T_Q1_Q2_3</attribute>
+	<attribute name="priority"><attribute name="expr"><attribute name="numValue">1</attribute></attribute></attribute>
+	<attribute name="weight"><attribute name="expr"><attribute name="numValue">1</attribute></attribute></attribute>
+	<attribute name="isHorizontal"><attribute name="expr"><attribute name="boolValue">false</attribute></attribute></attribute>
+	<attribute name="distribution"><attribute name="type">EXPONENTIAL</attribute><attribute name="param"><attribute name="number">0</attribute><attribute name="expr"><attribute name="numValue">2</attribute></attribute></attribute></attribute>
+</node>
+<arc id="28" arcType="arc" source="7" target="27">
+	<attribute name="valuation"><attribute name="expr"><attribute name="numValue">1</attribute></attribute></attribute>
+</arc>
+<arc id="29" arcType="arc" source="27" target="7">
+	<attribute name="valuation"><attribute name="expr"><attribute name="numValue">1</attribute></attribute></attribute>
+</arc>
+<arc id="30" arcType="arc" source="2" target="27">
+	<attribute name="valuation"><attribute name="token"><attribute name="occurs"><attribute name="intValue">1</attribute></attribute><attribute name="tokenProfile"><attribute name="expr"><attribute name="colorConst"><attribute name="type">client</attribute><attribute name="name">x1</attribute></attribute></attribute><attribute name="expr"><attribute name="colorConst"><attribute name="type">position1</attribute><attribute name="enumConst">n0</attribute></attribute></attribute></attribute></attribute></attribute>
+</arc>
+<arc id="31" arcType="arc" source="5" target="27">
+	<attribute name="valuation"><attribute name="token"><attribute name="occurs"><attribute name="intValue">1</attribute></attribute><attribute name="tokenProfile"><attribute name="expr"><attribute name="name">p2</attribute></attribute></attribute></attribute></attribute>
+</arc>
+<arc id="32" arcType="arc" source="27" target="5">
+	<attribute name="valuation"><attribute name="token"><attribute name="occurs"><attribute name="intValue">1</attribute></attribute><attribute name="tokenProfile"><attribute name="expr"><attribute name="function"><attribute name="++"><attribute name="name">p2</attribute><attribute name="intValue">1</attribute></attribute></attribute></attribute></attribute></attribute></attribute>
+</arc>
+<arc id="33" arcType="arc" source="27" target="4">
+	<attribute name="valuation"><attribute name="token"><attribute name="occurs"><attribute name="intValue">1</attribute></attribute><attribute name="tokenProfile"><attribute name="expr"><attribute name="colorConst"><attribute name="type">client</attribute><attribute name="name">x2</attribute></attribute></attribute><attribute name="expr"><attribute name="name">p2</attribute></attribute></attribute></attribute></attribute>
+</arc>
+<node id="34" nodeType="transition"> 
+	<attribute name="name">T_Q2_Q1_4</attribute>
+	<attribute name="priority"><attribute name="expr"><attribute name="numValue">1</attribute></attribute></attribute>
+	<attribute name="weight"><attribute name="expr"><attribute name="numValue">1</attribute></attribute></attribute>
+	<attribute name="isHorizontal"><attribute name="expr"><attribute name="boolValue">false</attribute></attribute></attribute>
+	<attribute name="distribution"><attribute name="type">EXPONENTIAL</attribute><attribute name="param"><attribute name="number">0</attribute><attribute name="expr"><attribute name="numValue">3</attribute></attribute></attribute></attribute>
+</node>
+<arc id="35" arcType="arc" source="7" target="34">
+	<attribute name="valuation"><attribute name="expr"><attribute name="numValue">1</attribute></attribute></attribute>
+</arc>
+<arc id="36" arcType="arc" source="34" target="6">
+	<attribute name="valuation"><attribute name="expr"><attribute name="numValue">1</attribute></attribute></attribute>
+</arc>
+<arc id="37" arcType="arc" source="4" target="34">
+	<attribute name="valuation"><attribute name="token"><attribute name="occurs"><attribute name="intValue">1</attribute></attribute><attribute name="tokenProfile"><attribute name="expr"><attribute name="colorConst"><attribute name="type">client</attribute><attribute name="name">x2</attribute></attribute></attribute><attribute name="expr"><attribute name="colorConst"><attribute name="type">position2</attribute><attribute name="enumConst">n0</attribute></attribute></attribute></attribute></attribute></attribute>
+</arc>
+<arc id="38" arcType="arc" source="3" target="34">
+	<attribute name="valuation"><attribute name="token"><attribute name="occurs"><attribute name="intValue">1</attribute></attribute><attribute name="tokenProfile"><attribute name="expr"><attribute name="name">p1</attribute></attribute></attribute></attribute></attribute>
+</arc>
+<arc id="39" arcType="arc" source="34" target="3">
+	<attribute name="valuation"><attribute name="token"><attribute name="occurs"><attribute name="intValue">1</attribute></attribute><attribute name="tokenProfile"><attribute name="expr"><attribute name="function"><attribute name="++"><attribute name="name">p1</attribute><attribute name="intValue">1</attribute></attribute></attribute></attribute></attribute></attribute></attribute>
+</arc>
+<arc id="40" arcType="arc" source="34" target="2">
+	<attribute name="valuation"><attribute name="token"><attribute name="occurs"><attribute name="intValue">1</attribute></attribute><attribute name="tokenProfile"><attribute name="expr"><attribute name="colorConst"><attribute name="type">client</attribute><attribute name="name">x1</attribute></attribute></attribute><attribute name="expr"><attribute name="name">p1</attribute></attribute></attribute></attribute></attribute>
+</arc>
+<node id="41" nodeType="transition"> 
+	<attribute name="name">DT_Q1_QD_5</attribute>
+	<attribute name="priority"><attribute name="expr"><attribute name="numValue">1</attribute></attribute></attribute>
+	<attribute name="weight"><attribute name="expr"><attribute name="numValue">1</attribute></attribute></attribute>
+	<attribute name="isHorizontal"><attribute name="expr"><attribute name="boolValue">false</attribute></attribute></attribute>
+	<attribute name="distribution"><attribute name="type">EXPONENTIAL</attribute><attribute name="param"><attribute name="number">0</attribute><attribute name="expr"><attribute name="numValue">6</attribute></attribute></attribute></attribute>
+</node>
+<arc id="42" arcType="arc" source="6" target="41">
+	<attribute name="valuation"><attribute name="expr"><attribute name="numValue">1</attribute></attribute></attribute>
+</arc>
+<arc id="43" arcType="arc" source="41" target="6">
+	<attribute name="valuation"><attribute name="expr"><attribute name="numValue">1</attribute></attribute></attribute>
+</arc>
+<arc id="44" arcType="arc" source="0" target="41">
+	<attribute name="valuation"><attribute name="expr"><attribute name="numValue">1</attribute></attribute></attribute>
+</arc>
+<arc id="45" arcType="arc" source="41" target="0">
+	<attribute name="valuation"><attribute name="expr"><attribute name="numValue">0</attribute></attribute></attribute>
+</arc>
+<arc id="46" arcType="arc" source="2" target="41">
+	<attribute name="valuation"><attribute name="token"><attribute name="occurs"><attribute name="intValue">1</attribute></attribute><attribute name="tokenProfile"><attribute name="expr"><attribute name="colorConst"><attribute name="type">client</attribute><attribute name="name">x1</attribute></attribute></attribute><attribute name="expr"><attribute name="colorConst"><attribute name="type">position1</attribute><attribute name="enumConst">n0</attribute></attribute></attribute></attribute></attribute></attribute>
+</arc>
+
+<node id="47" nodeType="place"> 
+	<attribute name="name">Wmax</attribute><attribute name="marking"><attribute name="expr"><attribute name="numValue">47</attribute></attribute></attribute>
+</node>
+
+<node id="48" nodeType="place"> 
+	<attribute name="name">N0</attribute><attribute name="marking"><attribute name="expr"><attribute name="numValue">15</attribute></attribute></attribute>
+</node>
+</model>
