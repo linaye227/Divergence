@@ -59,7 +59,7 @@ for line in lines:
         myset.add(l[2][3])
         myset.add(l[3][3])
     elif (l[0].lower()=="channel"):
-        if (l[3]!="inf"): capacity = min(int(l[3]),capacity)
+        if (l[3].lower()!="inf"): capacity = min(int(l[3]),capacity)
 myset.discard('$')
 myset.discard('-')
 L.sort()
