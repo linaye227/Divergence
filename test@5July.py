@@ -58,7 +58,7 @@ for line in lines:
         sumw +=int(l[5])
         myset.add(l[2][3])
         myset.add(l[3][3])
-    elif (l[0]=="Channel"):
+    elif (l[0].lower()=="channel"):
         if (l[3]!="inf"): capacity = min(int(l[3]),capacity)
 myset.discard('$')
 myset.discard('-')
