@@ -26,7 +26,7 @@ def poly(n,l):
         k*=n
     return ans
 theta = 0.01
-minimum = 1e2
+minimum = 1e6
 f = open('input.txt','r')
 out = open('output.grml', 'w')
 lines = f.readlines()
@@ -72,7 +72,7 @@ while(r-l>1):
     if (poly(mid,L[0])<sumw): l = mid # Finds the minimum number of clients necessary to be present in the system
     else: r = mid
 minimum = min(minimum,r)
-maxim = 1e2
+maxim = 1e6
 answer = 0
 while (True):
     answer = maxim
